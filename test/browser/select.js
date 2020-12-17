@@ -11,7 +11,7 @@ import {
   h3,
   h4,
   p,
-  makeDOMDriver,
+  DomDriver,
 } from '../../src/index.js';
 
 
@@ -37,7 +37,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -70,7 +70,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const dispose = run();
@@ -99,7 +99,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -140,7 +140,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -184,7 +184,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     // Make assertions
@@ -213,7 +213,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     function isDocument(element) {
@@ -245,7 +245,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -273,7 +273,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const element$ = sources.DOM.select('body').element();
@@ -289,7 +289,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const element$ = sources.DOM.select('body').elements();
@@ -305,7 +305,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const event$ = sources.DOM.select('body').events('click');
@@ -321,7 +321,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const element$ = sources.DOM.select('document').element();
@@ -337,7 +337,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const element$ = sources.DOM.select('document').elements();
@@ -353,7 +353,7 @@ describe('DOMSource.select()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const event$ = sources.DOM.select('document').events('click');

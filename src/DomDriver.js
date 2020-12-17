@@ -54,7 +54,7 @@ const addRootScope = vnode => {
   return vnode
 }
 
-export const makeDOMDriver = (container, options = {}) => {
+export const DomDriver = (container, options = {}) => {
 
   checkValidContainer(container)
 
@@ -168,4 +168,4 @@ export const makeDOMDriver = (container, options = {}) => {
   return DOMDriver
 }
 
-export default makeDOMDriver
+export default DomDriver

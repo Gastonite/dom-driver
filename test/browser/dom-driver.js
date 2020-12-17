@@ -8,7 +8,7 @@ import { setup, run as cycleRun } from '@cycle/run';
 import {
   div,
   h3,
-  makeDOMDriver,
+  DomDriver,
 } from '../../src/index';
 
 function createRenderTarget(id = null) {
@@ -21,11 +21,11 @@ function createRenderTarget(id = null) {
   return element;
 }
 
-describe('makeDOMDriver', function () {
+describe('DomDriver', function () {
   it('should accept a DOM element as input', function () {
     const element = createRenderTarget();
     assert.doesNotThrow(function () {
-      makeDOMDriver(element);
+      DomDriver(element);
     });
   });
 
@@ -35,7 +35,7 @@ describe('makeDOMDriver', function () {
     }
     const docfrag = document.createDocumentFragment();
     assert.doesNotThrow(function () {
-      makeDOMDriver(docfrag);
+      DomDriver(docfrag);
     });
   });
 
@@ -44,14 +44,14 @@ describe('makeDOMDriver', function () {
     const element = createRenderTarget();
     element.id = id;
     assert.doesNotThrow(function () {
-      makeDOMDriver('#' + id);
+      DomDriver('#' + id);
     });
   });
 
   it('should not accept a selector to an unknown element as input', function (done) {
     const sandbox = sinon.createSandbox();
     sandbox.stub(console, 'error');
-    makeDOMDriver('#nonsenseIdToNothing')($.never());
+    DomDriver('#nonsenseIdToNothing')($.never());
     setTimeout(() => {
       sinon.assert.calledOnce(console.error);
       sinon.assert.calledWithExactly(
@@ -67,14 +67,14 @@ describe('makeDOMDriver', function () {
 
   it('should not accept a number as input', function () {
     assert.throws(function () {
-      makeDOMDriver(123);
+      DomDriver(123);
     }, /Given container is not a DOM element neither a selector string/);
   });
 });
 
 describe('DOM Driver', function () {
   it('should throw if input is not an Observable<VTree>', function () {
-    const domDriver = makeDOMDriver(createRenderTarget());
+    const domDriver = DomDriver(createRenderTarget());
     assert.throws(function () {
       domDriver({});
     }, /The DOM driver function expects as input a Stream of virtual/);
@@ -88,7 +88,7 @@ describe('DOM Driver', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     const dispose = run();
     assert.strictEqual(typeof sources.DOM.isolateSource, 'function');
@@ -116,7 +116,7 @@ describe('DOM Driver', function () {
     }
 
     cycleRun(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     setTimeout(() => {
@@ -143,7 +143,7 @@ describe('DOM Driver', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -204,7 +204,7 @@ describe('DOM Driver', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget('disposal')),
+      DOM: DomDriver(createRenderTarget('disposal')),
     });
 
     const dispose = run();

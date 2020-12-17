@@ -15,7 +15,7 @@ import {
   h4,
   form,
   button,
-  makeDOMDriver,
+  DomDriver,
 } from '../../src/index';
 
 function createRenderTarget(id = null) {
@@ -70,7 +70,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     let dispose;
     sources.DOM.select('.myelementclass')
@@ -112,7 +112,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     const dispose = run();
     sources.DOM.select('.myelementclass')
@@ -153,7 +153,7 @@ describe('DOMSource.events()', function () {
     containerElement.appendChild(headerElement);
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(containerElement),
+      DOM: DomDriver(containerElement),
     });
     const dispose = run();
     sources.DOM.select('.myelementclass')
@@ -188,7 +188,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget('parent-001')),
+      DOM: DomDriver(createRenderTarget('parent-001')),
     });
 
     let dispose;
@@ -231,7 +231,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget('parent-002')),
+      DOM: DomDriver(createRenderTarget('parent-002')),
     });
 
     let dispose;
@@ -272,7 +272,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -318,7 +318,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -370,7 +370,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -430,7 +430,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget('parent-002')),
+      DOM: DomDriver(createRenderTarget('parent-002')),
     });
 
     let dispose;
@@ -485,7 +485,7 @@ describe('DOMSource.events()', function () {
       const renderTarget = fragment.appendChild(document.createElement('div'));
 
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(renderTarget),
+        DOM: DomDriver(renderTarget),
       });
 
       sources.DOM.select('.clickable')
@@ -540,7 +540,7 @@ describe('DOMSource.events()', function () {
       const renderTarget = fragment.appendChild(document.createElement('textarea'));
 
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(renderTarget),
+        DOM: DomDriver(renderTarget),
       });
 
       sources.DOM.select('.blurable')
@@ -599,7 +599,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -657,7 +657,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.form')
@@ -715,7 +715,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.clickable')
@@ -759,7 +759,7 @@ describe('DOMSource.events()', function () {
       done();
     } else {
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       $.merge(
@@ -807,7 +807,7 @@ describe('DOMSource.events()', function () {
       done();
     } else {
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       sources.DOM.select('.correct')
@@ -856,7 +856,7 @@ describe('DOMSource.events()', function () {
       done();
     } else {
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       sources.DOM.select('.correct')
@@ -898,7 +898,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.parent')
@@ -943,7 +943,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     const event$ = sources.DOM.select('.myelementclass').events('click');
     assert.strictEqual(event$._isCycleSource, 'DOM');
@@ -1016,7 +1016,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let count = 0;
@@ -1056,7 +1056,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.button')
@@ -1093,7 +1093,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.button')
@@ -1130,7 +1130,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.button')
@@ -1167,7 +1167,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.button')
@@ -1206,7 +1206,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.button')
@@ -1243,7 +1243,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.button')
@@ -1280,7 +1280,7 @@ describe('DOMSource.events()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.button')

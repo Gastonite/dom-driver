@@ -83,9 +83,9 @@ export { DomSource } from './DomSource.js';
  *   - `reportSnabbdomError: (err: any) => void` overrides the default error reporter function.
  * @return {Function} the DOM driver function. The function expects a stream of
  * VNode as input, and outputs the DOMSource object.
- * @function makeDOMDriver
+ * @function DomDriver
  */
-export { makeDOMDriver } from './makeDOMDriver.js';
+export { DomDriver } from './DomDriver.js';
 
 /**
  * A factory function to create mocked DOMSource objects, for testing purposes.

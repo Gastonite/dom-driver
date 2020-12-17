@@ -14,7 +14,7 @@ import {
   h3,
   h4,
   button,
-  makeDOMDriver,
+  DomDriver,
   thunk,
 } from '../../src/index';
 
@@ -37,7 +37,7 @@ describe('isolateSource', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     const dispose = run();
     const isolatedDOMSource = sources.DOM.isolateSource(
@@ -61,7 +61,7 @@ describe('isolateSink', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -104,7 +104,7 @@ describe('isolateSink', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -147,7 +147,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.bar')
@@ -188,7 +188,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.bar')
@@ -241,7 +241,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     // Assert parent has total access to its children
@@ -304,7 +304,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     // Assert parent has total access to its children
@@ -360,7 +360,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select('.bar')
@@ -394,7 +394,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(isolate(main), {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     sources.DOM.select(':root')
@@ -439,7 +439,7 @@ describe('isolation', function () {
     }
 
     const drivers = {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
       island(sink) { },
     };
     const { sinks, sources, run } = setup(app, drivers);
@@ -499,7 +499,7 @@ describe('isolation', function () {
     }
 
     const { sources, sinks, run } = setup(Monalisa, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
       frameClick: () => { },
       monalisaClick: () => { },
       click: () => { },
@@ -613,7 +613,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const { isolateSource } = sources.DOM;
@@ -671,7 +671,7 @@ describe('isolation', function () {
     }
 
     const drivers = {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
       triangleElement: sink => { },
     };
     const { sinks, sources, run } = setup(IsolatedApp, drivers);
@@ -706,7 +706,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const { isolateSource } = sources.DOM;
@@ -744,7 +744,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const { isolateSource } = sources.DOM;
@@ -779,7 +779,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     const isolatedDOMSource = sources.DOM.isolateSource(sources.DOM, 'foo');
 
@@ -816,7 +816,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     let dispose;
     const isolatedDOMSource = sources.DOM.isolateSource(sources.DOM, 'foo');
@@ -864,7 +864,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     let dispose;
     const isolatedDOMSource = sources.DOM.isolateSource(sources.DOM, '.foo');
@@ -937,7 +937,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
     let dispose;
     const topDOMSource = sources.DOM.isolateSource(sources.DOM, 'top');
@@ -1024,7 +1024,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -1087,7 +1087,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -1150,7 +1150,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -1222,7 +1222,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -1280,7 +1280,7 @@ describe('isolation', function () {
       }
 
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       sources.DOM.element()
@@ -1336,7 +1336,7 @@ describe('isolation', function () {
       }
 
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       sources.DOM.element()
@@ -1385,7 +1385,7 @@ describe('isolation', function () {
       }
 
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       sources.DOM.element()
@@ -1434,7 +1434,7 @@ describe('isolation', function () {
       }
 
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       sources.DOM.element()
@@ -1483,7 +1483,7 @@ describe('isolation', function () {
       }
 
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       sources.DOM.element()
@@ -1545,7 +1545,7 @@ describe('isolation', function () {
       }
 
       const { sinks, sources, run } = setup(main, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       let dispose;
@@ -1598,7 +1598,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -1666,7 +1666,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -1727,7 +1727,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
       click$: () => { },
     });
 
@@ -1811,7 +1811,7 @@ describe('isolation', function () {
     }
 
     const { sinks, sources, run } = setup(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;

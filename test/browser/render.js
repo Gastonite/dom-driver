@@ -12,7 +12,7 @@ import {
   select,
   option,
   p,
-  makeDOMDriver,
+  DomDriver,
 } from '../../src/index';
 
 
@@ -37,7 +37,7 @@ describe('DOM Rendering', function () {
     }
 
     cycleRun(main, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     setTimeout(() => {
@@ -73,7 +73,7 @@ describe('DOM Rendering', function () {
       done();
     } else {
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       let dispose;
@@ -119,7 +119,7 @@ describe('DOM Rendering', function () {
     const docfrag = document.createDocumentFragment();
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(docfrag),
+      DOM: DomDriver(docfrag),
     });
 
     let dispose;
@@ -158,7 +158,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -195,7 +195,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -246,7 +246,7 @@ describe('DOM Rendering', function () {
     selectElem.appendChild(optionElem2);
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(rootElem),
+      DOM: DomDriver(rootElem),
     });
 
     let dispose;
@@ -286,7 +286,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -340,7 +340,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const element$ = sources.DOM.select(':root').elements();
@@ -356,7 +356,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     const element$ = sources.DOM.select(':root').element();
@@ -379,7 +379,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -423,7 +423,7 @@ describe('DOM Rendering', function () {
       done();
     } else {
       const { sinks, sources, run } = setup(app, {
-        DOM: makeDOMDriver(createRenderTarget()),
+        DOM: DomDriver(createRenderTarget()),
       });
 
       let dispose;
@@ -476,7 +476,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -509,7 +509,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -538,7 +538,7 @@ describe('DOM Rendering', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;

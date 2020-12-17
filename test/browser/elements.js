@@ -5,7 +5,7 @@ import {
   div,
   span,
   p,
-  makeDOMDriver,
+  DomDriver,
 } from '../../src/index';
 
 function createRenderTarget(id = null) {
@@ -27,7 +27,7 @@ describe('DOMSource.elements()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     function isDocument(element) {
@@ -59,7 +59,7 @@ describe('DOMSource.elements()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     function isBody(element) {
@@ -91,7 +91,7 @@ describe('DOMSource.elements()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
@@ -121,7 +121,7 @@ describe('DOMSource.elements()', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: makeDOMDriver(createRenderTarget()),
+      DOM: DomDriver(createRenderTarget()),
     });
 
     let dispose;
