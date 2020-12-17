@@ -85,9 +85,9 @@ export class IsolateModule {
     const self = this
 
     return {
-      create(vNode) {
+      create(vnode) {
 
-        const { elm, data = {} } = vNode
+        const { elm, data = {} } = vnode
         const namespace = data.isolate
 
         if (Array.isArray(namespace))

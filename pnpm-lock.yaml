@@ -1,5 +1,4 @@
 dependencies:
-  '@cycle/dom': 22.8.0
   '@cycle/run': 5.5.0
   snabbdom: 0.7.4
   snabbdom-selector: 4.2.0_snabbdom@0.7.4
@@ -22,17 +21,6 @@ devDependencies:
   webpack: 4.44.2_webpack@4.44.2
 lockfileVersion: 5.1
 packages:
-  /@cycle/dom/22.8.0:
-    dependencies:
-      '@cycle/run': 5.5.0
-      snabbdom: 0.7.4
-      snabbdom-selector: 4.2.0_snabbdom@0.7.4
-      xstream: 11.14.0
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha512-YnB4zUGOXVdPFXaVzYEUHXNqJlz1190Qfj1UpEBSiiJMPw+jskrNPrlhzqpE1MVjtpNlBJVoe+Vq73d2MnP3Bw==
   /@cycle/isolate/5.2.0:
     dependencies:
       '@cycle/run': 5.5.0
@@ -4093,7 +4081,6 @@ packages:
     resolution:
       integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 specifiers:
-  '@cycle/dom': ^22.8.0
   '@cycle/isolate': ^5.2.0
   '@cycle/run': ^5.5.0
   es6-map: ^0.1.5

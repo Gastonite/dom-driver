@@ -1,11 +1,7 @@
 export { thunk } from './thunk.js';
-import vnodeModule from 'snabbdom/vnode.js';
-import domSourceModule from '@cycle/dom/lib/es6/DOMSource.js';
-export { MainDOMSource } from './MainDOMSource.js';
+export { DomSource } from './DomSource.js';
 
 
-export const { VNode, VNodeData } = vnodeModule
-export const { DOMSource, EventsFnOptions } = domSourceModule
 /**
  * A factory for the DOM driver function.
  *
@@ -91,8 +87,6 @@ export const { DOMSource, EventsFnOptions } = domSourceModule
  */
 export { makeDOMDriver } from './makeDOMDriver.js';
 
-// export const { makeDOMDriver, DOMDriverOptions } = domDriverModule.default || domDriverModule
-// export { DomDriver, DOMDriverOptions } from './DomDriver';
 /**
  * A factory function to create mocked DOMSource objects, for testing purposes.
  *
@@ -135,12 +129,8 @@ export { makeDOMDriver } from './makeDOMDriver.js';
  *
  * @function mockDOMSource
  */
-// import mockDomSourceModule from '@cycle/dom/lib/es6/mockDOMSource.js';
-export { MockedDOMSource } from './MockedDomSource.js';
+export { MockedDomSource } from './MockedDomSource.js';
 
-// export const { mockDOMSource, MockConfig, MockedDOMSource } = mockDomSourceModule
-
-// export { CycleDOMEvent } from './EventDelegator.js';
 /**
  * The hyperscript function `h()` is a function to create virtual DOM objects,
  * also known as VNodes. Call

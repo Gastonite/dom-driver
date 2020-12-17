@@ -3,9 +3,6 @@
 
 
 
-// eslint-disable-next-line no-undef
-// const { document, HTMLElement, DocumentFragment } = window
-
 function isValidNode(input) {
 
   const ELEM_TYPE = 1

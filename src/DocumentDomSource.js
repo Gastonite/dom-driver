@@ -1,4 +1,4 @@
-import xs, { } from 'xstream'
+import $ from 'xstream'
 import { adapt } from '@cycle/run/lib/adapt.js'
 import { fromEvent } from './fromEvent.js'
 
@@ -7,7 +7,7 @@ import { fromEvent } from './fromEvent.js'
 
 
 
-export class DocumentDOMSource {
+export class DocumentDomSource {
   constructor(_name) {
     this._name = _name
 
@@ -20,10 +20,8 @@ export class DocumentDOMSource {
 
   elements() {
 
-    // const { document } = window
-
     const out = adapt(
-      xs.of([document])
+      $.of([document])
     )
 
     out._isCycleSource = this._name
@@ -34,7 +32,7 @@ export class DocumentDOMSource {
   element() {
 
     const out = adapt(
-      xs.of(document)
+      $.of(document)
     )
 
     out._isCycleSource = this._name

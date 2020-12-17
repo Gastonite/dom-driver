@@ -1015,7 +1015,7 @@ describe('isolation', function () {
         .map(children =>
           $
             .combine(...children.map(child => child.DOM))
-            .map(childVNodes => div('.parent', childVNodes))
+            .map(childVnodes => div('.parent', childVnodes))
         )
         .flatten();
       return {

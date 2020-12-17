@@ -3,7 +3,7 @@ import { h } from 'snabbdom/h.js';
 import { classNameFromVNode, selectorParser } from 'snabbdom-selector';
 import { isDocFrag } from './utils.js';
 
-export class VNodeWrapper {
+export class VnodeWrapper {
   constructor(rootElement) {
 
     this.rootElement = rootElement
@@ -18,15 +18,15 @@ export class VNodeWrapper {
       return this._wrap([]);
 
     const { tagName: selTagName, id: selId } = selectorParser(vnode);
-    const vNodeClassName = classNameFromVNode(vnode);
-    const vNodeData = vnode.data || {};
-    const vNodeDataProps = vNodeData.props || {};
-    const { id: vNodeId = selId } = vNodeDataProps;
+    const vnodeClassName = classNameFromVNode(vnode);
+    const vnodeData = vnode.data || {};
+    const vnodeDataProps = vnodeData.props || {};
+    const { id: vnodeId = selId } = vnodeDataProps;
 
-    const isVNodeAndRootElementIdentical = typeof vNodeId === 'string'
-      && vNodeId.toUpperCase() === this.rootElement.id.toUpperCase()
+    const isVNodeAndRootElementIdentical = typeof vnodeId === 'string'
+      && vnodeId.toUpperCase() === this.rootElement.id.toUpperCase()
       && selTagName.toUpperCase() === this.rootElement.tagName.toUpperCase()
-      && vNodeClassName.toUpperCase() === this.rootElement.className.toUpperCase();
+      && vnodeClassName.toUpperCase() === this.rootElement.className.toUpperCase();
 
     if (isVNodeAndRootElementIdentical)
       return vnode;

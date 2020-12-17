@@ -6,9 +6,6 @@ import { fromEvent } from './fromEvent.js'
 
 
 
-// // eslint-disable-next-line no-undef
-// const { document } = window
-
 export class BodyDomSource {
   constructor(_name) {
     this._name = _name

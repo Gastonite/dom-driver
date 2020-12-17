@@ -1,5 +1,5 @@
 import { adapt } from '@cycle/run/lib/adapt.js'
-import { DocumentDOMSource } from './DocumentDomSource.js'
+import { DocumentDomSource } from './DocumentDomSource.js'
 import { BodyDomSource } from './BodyDomSource.js'
 import { ElementFinder } from './ElementFinder.js'
 import { makeIsolateSink, getScopeObj } from './isolate.js'
@@ -8,7 +8,7 @@ import { makeIsolateSink, getScopeObj } from './isolate.js'
 
 
 
-export class MainDOMSource {
+export class DomSource {
   constructor(
     _rootElement$,
     _sanitation$,
@@ -28,7 +28,7 @@ export class MainDOMSource {
     })
 
     this.isolateSource = (source, scope) =>
-      new MainDOMSource(
+      new DomSource(
         source._rootElement$,
         source._sanitation$,
         source._namespace.concat(getScopeObj(scope)),
@@ -86,7 +86,7 @@ export class MainDOMSource {
       )
 
     if (selector === 'document')
-      return new DocumentDOMSource(this._name)
+      return new DocumentDomSource(this._name)
 
     if (selector === 'body')
       return new BodyDomSource(this._name)
@@ -96,7 +96,7 @@ export class MainDOMSource {
         ? []
         : this._namespace.concat({ type: 'selector', scope: selector.trim() })
 
-    return new MainDOMSource(
+    return new DomSource(
       this._rootElement$,
       this._sanitation$,
       namespace,
@@ -131,12 +131,4 @@ export class MainDOMSource {
     this._sanitation$.shamefullySendNext(null)
     //this._isolateModule.reset();
   }
-
-  // The implementation of these are in the constructor so that their `this`
-  // references are automatically bound to the instance, so that library users
-  // can do destructuring `const {isolateSource, isolateSink} = sources.DOM` and
-  // not get bitten by a missing `this` reference.
-
-  // public isolateSource: (source: MainDOMSource, scope: string) => MainDOMSource;
-  // public isolateSink: IsolateSink<VNode>;
 }

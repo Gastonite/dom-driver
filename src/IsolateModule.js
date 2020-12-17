@@ -15,7 +15,6 @@ export class IsolateModule {
    * the virtual DOM in a single patch. Those nodes are cleaned once snabbdom
    * has finished patching the DOM.
    */
-  // private vnodesBeingRemoved: Array<VNode>;
 
   constructor() {
     this.namespaceByElement = new Map();
@@ -85,9 +84,9 @@ export class IsolateModule {
   createModule() {
     const self = this;
     return {
-      create(emptyVNode, vNode) {
+      create(emptyVnode, vnode) {
 
-        const { elm, data = {} } = vNode;
+        const { elm, data = {} } = vnode;
         const namespace = data.isolate;
 
         if (Array.isArray(namespace)) {
@@ -95,10 +94,10 @@ export class IsolateModule {
         }
       },
 
-      update(oldVNode, vNode) {
+      update(oldVnode, vnode) {
 
-        const { elm: oldElm, data: oldData = {} } = oldVNode;
-        const { elm, data = {} } = vNode;
+        const { elm: oldElm, data: oldData = {} } = oldVnode;
+        const { elm, data = {} } = vnode;
         const oldNamespace = oldData.isolate;
         const namespace = data.isolate;
 
@@ -112,12 +111,12 @@ export class IsolateModule {
         }
       },
 
-      destroy(vNode) {
-        self.vnodesBeingRemoved.push(vNode);
+      destroy(vnode) {
+        self.vnodesBeingRemoved.push(vnode);
       },
 
-      remove(vNode, cb) {
-        self.vnodesBeingRemoved.push(vNode);
+      remove(vnode, cb) {
+        self.vnodesBeingRemoved.push(vnode);
         cb();
       },
 

@@ -1,8 +1,6 @@
 import 'symbol-observable';
 import * as assert from 'assert';
 import { Stream as $ } from 'xstream';
-// import { from } from 'rxjs';
-// import { take, skip, map } from 'rxjs/operators/index.js';
 import { setup } from '@cycle/run';
 import { setAdapt } from '@cycle/run/lib/adapt.js';
 import {
@@ -11,25 +9,25 @@ import {
   h2,
   div,
   h,
-  MockedDOMSource,
+  MockedDomSource,
 } from '../../src/index.js';
 
-const mockDomSource = o => {
-  return new MockedDOMSource(o)
-}
 
-describe('MockedDOMSource', function () {
+
+
+
+describe('MockedDomSource', function () {
 
   beforeEach(() => {
     setAdapt($.from);
   });
 
   it('should be in accessible in the API', function () {
-    assert.strictEqual(typeof mockDomSource, 'function');
+    assert.strictEqual(typeof MockedDomSource, 'function');
   });
 
   it('should make an Observable for clicks on `.foo`', function (done) {
-    const userEvents = mockDomSource({
+    const userEvents = MockedDomSource({
       '.foo': {
         click: $.of(135),
       },
@@ -48,7 +46,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('should make multiple user event Observables', function (done) {
-    const userEvents = mockDomSource({
+    const userEvents = MockedDomSource({
       '.foo': {
         click: $.of(135),
       },
@@ -72,7 +70,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('should make multiple user event Observables on the same selector', function (done) {
-    const userEvents = mockDomSource({
+    const userEvents = MockedDomSource({
       '.foo': {
         click: $.of(135),
         scroll: $.of(3),
@@ -95,7 +93,7 @@ describe('MockedDOMSource', function () {
 
   it('should return an empty Observable if query does not match', function (done) {
 
-    const userEvents = mockDomSource({
+    const userEvents = MockedDomSource({
       '.foo': {
         click: $.of(135),
       },
@@ -112,7 +110,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('should return empty Observable for select().elements and none is defined', function (done) {
-    const userEvents = mockDomSource({
+    const userEvents = MockedDomSource({
       '.foo': {
         click: $.of(135),
       },
@@ -128,7 +126,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('should return defined Observable for select().elements', function (done) {
-    const mockedDOMSource = mockDomSource({
+    const mockedDOMSource = MockedDomSource({
       '.foo': {
         elements: $.of(135),
       },
@@ -147,7 +145,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('should have DevTools flag in elements() source stream', function (done) {
-    const mockedDOMSource = mockDomSource({
+    const mockedDOMSource = MockedDomSource({
       '.foo': {
         elements: $.of(135),
       },
@@ -160,7 +158,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('should have DevTools flag in events() source stream', function (done) {
-    const userEvents = mockDomSource({
+    const userEvents = MockedDomSource({
       '.foo': {
         click: $.of(135),
       },
@@ -173,7 +171,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('should return defined Observable when chaining .select()', function (done) {
-    const mockedDOMSource = mockDomSource({
+    const mockedDOMSource = MockedDomSource({
       '.bar': {
         '.foo': {
           '.baz': {
@@ -199,7 +197,7 @@ describe('MockedDOMSource', function () {
 
   it('multiple .select()s should not throw when given empty mockedSelectors', () => {
     assert.doesNotThrow(() => {
-      const DOM = mockDomSource({});
+      const DOM = MockedDomSource({});
       DOM.select('.something')
         .select('.other')
         .events('click');
@@ -207,7 +205,7 @@ describe('MockedDOMSource', function () {
   });
 
   it('multiple .select()s should return some observable if not defined', () => {
-    const DOM = mockDomSource({});
+    const DOM = MockedDomSource({});
     const domSource = DOM.select('.something').select('.other');
     assert.strictEqual(
       typeof domSource.events('click').subscribe,
@@ -222,7 +220,7 @@ describe('MockedDOMSource', function () {
   });
 });
 
-describe('isolation on MockedDOMSource', function () {
+describe('isolation on MockedDomSource', function () {
   it('should have the same effect as DOM.select()', function (done) {
 
     function app(_sources) {
@@ -238,7 +236,7 @@ describe('isolation on MockedDOMSource', function () {
 
     const { sinks, sources, run } = setup(app, {
       DOM: () =>
-        mockDomSource({
+        MockedDomSource({
           '.___foo': {
             '.bar': {
               elements: $.of('skipped', 135),
@@ -276,7 +274,7 @@ describe('isolation on MockedDOMSource', function () {
     }
 
     const { sinks, sources, run } = setup(app, {
-      DOM: _ => mockDomSource({}),
+      DOM: _ => MockedDomSource({}),
     });
     const dispose = run();
     const isolatedDOMSource = sources.DOM.isolateSource(sources.DOM, 'foo');
@@ -302,7 +300,7 @@ describe('isolation on MockedDOMSource', function () {
 
     const { sinks, sources, run } = setup(app, {
       DOM: _ =>
-        mockDomSource({
+        MockedDomSource({
           '.___ISOLATION': {
             '.bar': {
               elements: $.of('skipped', 'Wrong'),

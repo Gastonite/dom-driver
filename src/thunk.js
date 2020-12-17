@@ -4,30 +4,30 @@ import { h } from 'snabbdom/h.js';
 
 
 
-function copyToThunk(vnode, thunkVNode) {
+function copyToThunk(vnode, thunkVnode) {
 
-  thunkVNode.elm = vnode.elm;
-  vnode.data.fn = thunkVNode.data.fn;
-  vnode.data.args = thunkVNode.data.args;
-  vnode.data.isolate = thunkVNode.data.isolate;
-  thunkVNode.data = vnode.data;
-  thunkVNode.children = vnode.children;
-  thunkVNode.text = vnode.text;
-  thunkVNode.elm = vnode.elm;
+  thunkVnode.elm = vnode.elm;
+  vnode.data.fn = thunkVnode.data.fn;
+  vnode.data.args = thunkVnode.data.args;
+  vnode.data.isolate = thunkVnode.data.isolate;
+  thunkVnode.data = vnode.data;
+  thunkVnode.children = vnode.children;
+  thunkVnode.text = vnode.text;
+  thunkVnode.elm = vnode.elm;
 }
 
-function init(thunkVNode) {
+function init(thunkVnode) {
 
-  const cur = thunkVNode.data;
+  const cur = thunkVnode.data;
   const vnode = cur.fn.apply(undefined, cur.args)
 
-  copyToThunk(vnode, thunkVNode);
+  copyToThunk(vnode, thunkVnode);
 }
 
-function prepatch(oldVnode, thunkVNode) {
+function prepatch(oldVnode, thunkVnode) {
 
   const old = oldVnode.data;
-  const cur = thunkVNode.data;
+  const cur = thunkVnode.data;
 
   let i;
 
@@ -35,15 +35,15 @@ function prepatch(oldVnode, thunkVNode) {
   const args = cur.args;
 
   if (old.fn !== cur.fn || oldArgs.length !== args.length)
-    copyToThunk(cur.fn.apply(undefined, args), thunkVNode);
+    copyToThunk(cur.fn.apply(undefined, args), thunkVnode);
 
   for (i = 0; i < args.length; ++i) {
     if (oldArgs[i] !== args[i]) {
-      copyToThunk(cur.fn.apply(undefined, args), thunkVNode);
+      copyToThunk(cur.fn.apply(undefined, args), thunkVnode);
       return;
     }
   }
-  copyToThunk(oldVnode, thunkVNode);
+  copyToThunk(oldVnode, thunkVnode);
 }
 
 export function thunk(sel, key, fn, args) {

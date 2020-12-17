@@ -313,7 +313,7 @@ describe('DOMSource.select()', function () {
     done();
   });
 
-  it('should have DevTools flag in DocumentDOMSource element() stream', function (done) {
+  it('should have DevTools flag in DocumentDomSource element() stream', function (done) {
     function app(_sources) {
       return {
         DOM: $.of(div('hello world')),
@@ -329,7 +329,7 @@ describe('DOMSource.select()', function () {
     done();
   });
 
-  it('should have DevTools flag in DocumentDOMSource elements() stream', function (done) {
+  it('should have DevTools flag in DocumentDomSource elements() stream', function (done) {
     function app(_sources) {
       return {
         DOM: $.of(div('hello world')),
@@ -345,7 +345,7 @@ describe('DOMSource.select()', function () {
     done();
   });
 
-  it('should have DevTools flag in DocumentDOMSource events() stream', function (done) {
+  it('should have DevTools flag in DocumentDomSource events() stream', function (done) {
     function app(_sources) {
       return {
         DOM: $.of(div('hello world')),

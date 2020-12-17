@@ -7,7 +7,7 @@
 
 // const SCOPE_PREFIX = '___';
 
-// export const MockedDOMSource = mockConfig => {
+// export const MockedDomSource = mockConfig => {
 
 //   let _elements = mockConfig.elements
 //     ? mockConfig.elements
@@ -47,7 +47,7 @@
 //     select(selector) {
 //       const mockConfigForSelector = mockConfig[selector] || {};
 
-//       return MockedDOMSource(mockConfigForSelector);
+//       return MockedDomSource(mockConfigForSelector);
 //     },
 
 //     isolateSource(source, scope) {
@@ -79,7 +79,7 @@ import { adapt } from '@cycle/run/lib/adapt.js';
 
 const SCOPE_PREFIX = '___';
 
-/* export const MockedDOMSource = _mockConfig => {
+export const MockedDomSource = _mockConfig => {
 
   const _elements = _mockConfig.elements || adapt($.empty())
 
@@ -119,7 +119,7 @@ const SCOPE_PREFIX = '___';
 
       const mockConfigForSelector = _mockConfig[selector] || {};
 
-      return MockedDOMSource(mockConfigForSelector);
+      return MockedDomSource(mockConfigForSelector);
     },
     isolateSource(source, scope) {
       return source.select('.' + SCOPE_PREFIX + scope);
@@ -137,8 +137,8 @@ const SCOPE_PREFIX = '___';
       );
     }
   }
-} */
-export class MockedDOMSource {
+}
+/* export class MockedDomSource {
   // private _elements: FantasyObservable<any>;
 
   constructor(_mockConfig) {
@@ -185,7 +185,7 @@ export class MockedDOMSource {
 
     const mockConfigForSelector = this._mockConfig[selector] || {};
 
-    return new MockedDOMSource(mockConfigForSelector);
+    return new MockedDomSource(mockConfigForSelector);
   }
 
   isolateSource(source, scope) {
@@ -205,3 +205,4 @@ export class MockedDOMSource {
     );
   }
 }
+ */

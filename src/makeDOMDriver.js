@@ -2,21 +2,17 @@ import { init } from 'snabbdom'
 import { Stream as $ } from 'xstream'
 import concatStreams from 'xstream/extra/concat.js'
 import sampleCombine from 'xstream/extra/sampleCombine.js'
-import { MainDOMSource } from './MainDOMSource.js'
-import { toVNode } from 'snabbdom/tovnode.js'
-import { VNodeWrapper } from './VNodeWrapper.js'
+import { DomSource } from './DomSource.js'
+import { toVNode as toVnode } from 'snabbdom/tovnode.js'
+import { VnodeWrapper } from './VnodeWrapper.js'
 import { getValidNode, checkValidContainer } from './utils.js'
 import defaultModules from './modules.js'
-// import { IsolateModule } from '@cycle/dom/lib/es6/IsolateModule.js'
 import { IsolateModule } from './IsolateModule.js'
 import { EventDelegator } from './EventDelegator.js'
 
 
 
 
-
-// eslint-disable-next-line no-undef
-// const { document, MutationObserver } = window
 
 const dropCompletion = input => {
   return $.merge(input, $.never())
@@ -26,7 +22,7 @@ const defaultReportSnabbdomError = err => {
   (console.error || console.log)(err)
 }
 
-const makeDOMReady$ = () => {
+const DomReady$ = () => {
 
   return $.create({
     start(listener) {
@@ -71,7 +67,7 @@ export const makeDOMDriver = (container, options = {}) => {
   const isolateModule = new IsolateModule()
   const patch = init([isolateModule.createModule()].concat(modules))
 
-  const domReady$ = makeDOMReady$()
+  const domReady$ = DomReady$()
 
   let vnodeWrapper
   let mutationObserver
@@ -100,7 +96,7 @@ export const makeDOMDriver = (container, options = {}) => {
 
     const firstRoot$ = domReady$.map(() => {
       const firstRoot = getValidNode(container) || document.body
-      vnodeWrapper = new VNodeWrapper(firstRoot)
+      vnodeWrapper = new VnodeWrapper(firstRoot)
       return firstRoot
     })
 
@@ -109,8 +105,8 @@ export const makeDOMDriver = (container, options = {}) => {
     // reality a SinkProxy from @cycle/run, and we don't want to miss the first
     // emission when the main() is connected to the drivers.
     // Read more in issue #739.
-    const rememberedVNode$ = vnode$.remember()
-    rememberedVNode$.addListener({})
+    const rememberedVnode$ = vnode$.remember()
+    rememberedVnode$.addListener({})
 
     // The mutation observer internal to mutationConfirmed$ should
     // exist before elementAfterPatch$ calls mutationObserver.observe()
@@ -120,12 +116,12 @@ export const makeDOMDriver = (container, options = {}) => {
       .map(firstRoot => {
 
         return $.merge(
-          rememberedVNode$.endWhen(sanitation$),
+          rememberedVnode$.endWhen(sanitation$),
           sanitation$
         )
           .map(vnode => vnodeWrapper.call(vnode))
-          .startWith(addRootScope(toVNode(firstRoot)))
-          .fold(patch, toVNode(firstRoot))
+          .startWith(addRootScope(toVnode(firstRoot)))
+          .fold(patch, toVnode(firstRoot))
           .drop(1)
           .map(x => x.elm)
           .startWith(firstRoot)
@@ -159,7 +155,7 @@ export const makeDOMDriver = (container, options = {}) => {
 
     const delegator = new EventDelegator(rootElement$, isolateModule)
 
-    return new MainDOMSource(
+    return new DomSource(
       rootElement$,
       sanitation$,
       [],
