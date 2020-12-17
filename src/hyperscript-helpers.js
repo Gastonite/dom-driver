@@ -1,36 +1,36 @@
-import { h } from 'snabbdom/h.js';
+import { h } from 'snabbdom/h.js'
 
 function isValidString(param) {
-  return typeof param === 'string' && param.length > 0;
+  return typeof param === 'string' && param.length > 0
 }
 
 function isSelector(param) {
-  return isValidString(param) && (param[0] === '.' || param[0] === '#');
+  return isValidString(param) && (param[0] === '.' || param[0] === '#')
 }
 
 function createTagFunction(tagName) {
   return function hyperscript(a, b, c) {
-    const hasA = typeof a !== 'undefined';
-    const hasB = typeof b !== 'undefined';
-    const hasC = typeof c !== 'undefined';
+    const hasA = typeof a !== 'undefined'
+    const hasB = typeof b !== 'undefined'
+    const hasC = typeof c !== 'undefined'
     if (isSelector(a)) {
       if (hasB && hasC) {
-        return h(tagName + a, b, c);
+        return h(tagName + a, b, c)
       } else if (hasB) {
-        return h(tagName + a, b);
+        return h(tagName + a, b)
       } else {
-        return h(tagName + a, {});
+        return h(tagName + a, {})
       }
     } else if (hasC) {
-      return h(tagName + a, b, c);
+      return h(tagName + a, b, c)
     } else if (hasB) {
-      return h(tagName, a, b);
+      return h(tagName, a, b)
     } else if (hasA) {
-      return h(tagName, a);
+      return h(tagName, a)
     } else {
-      return h(tagName, {});
+      return h(tagName, {})
     }
-  };
+  }
 }
 
 const SVG_TAG_NAMES = [
@@ -113,13 +113,13 @@ const SVG_TAG_NAMES = [
   'use',
   'view',
   'vkern',
-];
+]
 
-const svg = createTagFunction('svg');
+const svg = createTagFunction('svg')
 
 SVG_TAG_NAMES.forEach(tag => {
-  svg[tag] = createTagFunction(tag);
-});
+  svg[tag] = createTagFunction(tag)
+})
 
 const TAG_NAMES = [
   'a',
@@ -225,7 +225,7 @@ const TAG_NAMES = [
   'u',
   'ul',
   'video',
-];
+]
 
 const exported = {
   SVG_TAG_NAMES,
@@ -233,11 +233,11 @@ const exported = {
   svg,
   isSelector,
   createTagFunction,
-};
+}
 
 TAG_NAMES.forEach(n => {
-  exported[n] = createTagFunction(n);
-});
+  exported[n] = createTagFunction(n)
+})
 
-export default exported;
+export default exported
 

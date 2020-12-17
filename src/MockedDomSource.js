@@ -70,71 +70,66 @@
 //     }
 //   }
 // }
-import { Stream as $ } from 'xstream';
-import { adapt } from '@cycle/run/lib/adapt.js';
+import { Stream as $ } from 'xstream'
+import { adapt } from '@cycle/run/lib/adapt.js'
 
 
 
 
 
-const SCOPE_PREFIX = '___';
+const SCOPE_PREFIX = '___'
 
 export const MockedDomSource = _mockConfig => {
 
   const _elements = _mockConfig.elements || adapt($.empty())
 
   const elements = () => {
-    const out = _elements;
-    out._isCycleSource = 'MockedDOM';
-    return out;
+    const out = _elements
+    out._isCycleSource = 'MockedDOM'
+    return out
   }
 
   return {
-
     elements,
     element() {
 
       const output$ = elements()
         .filter((arr) => arr.length > 0)
         .map((arr) => arr[0])
-        .remember();
+        .remember()
 
-      const out = adapt(output$);
-      out._isCycleSource = 'MockedDOM';
-      return out;
+      const out = adapt(output$)
+      out._isCycleSource = 'MockedDOM'
+      return out
     },
-    events(
-      eventType,
-      options,
-      bubbles
-    ) {
-      const streamForEventType = _mockConfig[eventType];
-      const out = adapt(streamForEventType || $.empty());
+    events(eventType/* , options, bubbles */) {
+      const streamForEventType = _mockConfig[eventType]
+      const out = adapt(streamForEventType || $.empty())
 
-      out._isCycleSource = 'MockedDOM';
+      out._isCycleSource = 'MockedDOM'
 
-      return out;
+      return out
     },
     select(selector) {
 
-      const mockConfigForSelector = _mockConfig[selector] || {};
+      const mockConfigForSelector = _mockConfig[selector] || {}
 
-      return MockedDomSource(mockConfigForSelector);
+      return MockedDomSource(mockConfigForSelector)
     },
     isolateSource(source, scope) {
-      return source.select('.' + SCOPE_PREFIX + scope);
+      return source.select('.' + SCOPE_PREFIX + scope)
     },
     isolateSink(sink, scope) {
       return adapt(
         $.fromObservable(sink).map(vnode => {
           if (vnode.sel && vnode.sel.indexOf(SCOPE_PREFIX + scope) !== -1) {
-            return vnode;
+            return vnode
           } else {
-            vnode.sel += `.${SCOPE_PREFIX}${scope}`;
-            return vnode;
+            vnode.sel += `.${SCOPE_PREFIX}${scope}`
+            return vnode
           }
         })
-      );
+      )
     }
   }
 }
