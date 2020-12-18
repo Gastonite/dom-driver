@@ -30,6 +30,7 @@ function createRenderTarget(id = null) {
 
 describe('isolateSource', function () {
   it('should return source also with isolateSource and isolateSink', function (done) {
+
     function app() {
       return {
         DOM: $.of(h('h3.top-most')),
@@ -51,6 +52,7 @@ describe('isolateSource', function () {
     done()
   })
 })
+
 describe('isolateSink', function () {
   it('should add an isolate field to the vtree sink', function (done) {
     function app(_sources) {
