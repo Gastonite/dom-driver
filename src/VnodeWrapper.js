@@ -12,9 +12,9 @@ export class VnodeWrapper {
   call(vnode) {
 
     if (isDocFrag(this.rootElement))
-      return this._wrapDocFrag(vnode === null ? [] : [vnode])
+      return this._wrapDocFrag(!vnode ? [] : [vnode])
 
-    if (vnode === null)
+    if (!vnode)
       return this._wrap([])
 
     const { tagName: selTagName, id: selId } = selectorParser(vnode)

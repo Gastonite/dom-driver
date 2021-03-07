@@ -43,13 +43,13 @@ export class DomSource {
   _elements() {
     if (this._namespace.length === 0) {
       return this._rootElement$.map(x => [x])
-    } else {
-      const elementFinder = new ElementFinder(
-        this._namespace,
-        this._isolateModule
-      )
-      return this._rootElement$.map(() => elementFinder.call())
     }
+
+    const elementFinder = new ElementFinder(
+      this._namespace,
+      this._isolateModule
+    )
+    return this._rootElement$.map(() => elementFinder.call())
   }
 
   elements() {
@@ -122,7 +122,9 @@ export class DomSource {
     )
 
     const out = adapt(event$)
+
     out._isCycleSource = this._name
+
     return out
   }
 
